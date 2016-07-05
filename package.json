@@ -1,0 +1,52 @@
+{
+  "name": "commute-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dist": "gulp dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://akinsella@git@github.com:commute/commute-sync.git"
+  },
+  "homepage": "https://github.com/akinsella/commute-sync",
+  "bugs": "https://github.com/akinsella/commute-sync/issues",
+  "author": "Alexis Kinsella <alexis.kinsella@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "georedis": "^3.0.3",
+    "knex": "^0.11.7",
+    "knex-postgis": "^0.1.8",
+    "lodash": "^4.13.1",
+    "moment": "^2.13.0",
+    "mysql": "^2.11.1",
+    "redis": "^2.6.2",
+    "request": "^2.72.0",
+    "wkx": "^0.3.0"
+  },
+  "engines": {
+    "nodejs": "^6.2.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "del": "^2.2.0",
+    "fakeredis": "^1.0.3",
+    "gulp": "^3.9.1",
+    "gulp-install": "^0.6.0",
+    "gulp-zip": "^3.2.0",
+    "mocha": "^2.5.3",
+    "run-sequence": "^1.1.5",
+    "sinon": "^1.17.4",
+    "spatialite": "0.0.6",
+    "sqlite3": "^3.1.4"
+  },
+  "files": [
+    "index.js",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
+}
