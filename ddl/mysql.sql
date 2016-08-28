@@ -44,11 +44,33 @@ CREATE TABLE `stations` (
   `number` int(11) DEFAULT NULL,
   `position` point DEFAULT NULL,
   `status` enum('OPEN','CLOSED') DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=27169 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+--
+-- Table structure for table `stations_ts`
+--
+
+DROP TABLE IF EXISTS `stations_ts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stations_ts` (
+  `number` int(11) NOT NULL DEFAULT 0,
+  `available_bike_stands` int(11) NOT NULL DEFAULT 0,
+  `available_bikes` int(11) NOT NULL DEFAULT 0,
+  `timestamp` timestamp NOT NULL,
+  index number_idx (`number`),
+  index timestamp_idx (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
