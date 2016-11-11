@@ -1,23 +1,20 @@
-# Ubuntu 14.04 Trusty support
 sudo: required
 dist: trusty
-
 language: node_js
 node_js:
-  - "6.1"
-
+- '6.1'
 addons:
   apt:
     sources:
-    # add PPAs with more up-to-date toolchains
     - ubuntu-toolchain-r-test
     - llvm-toolchain-precise-3.6
     packages:
-    # install toolchains
     - gcc-5
     - g++-5
     - clang-3.6
-
 cache:
   directories:
-    - node_modules
+  - node_modules
+notifications:
+  slack:
+    secure: vyXsVpPNXEhkrDriqYqaKb6Dm0jsokdhOglEASA8RPuVpSI4yXHn1YmK2ReWsLPYMA7igH5/tFJEfAhv/BcdIIJAVWUSFRFTY00LD3PRY3q72/K6B2BWECPk9NAa3OondlIHo8CNNXb02TOwNjI3VwGpls1q2/Q7YFsVibIwv3DOhxKKcW0ESyVl59VrR8vu/tXQXwEyNImerBExlY+hRn3U7TsGdiznm7RFSmKELF6FvqArwRhvXI4+l8AQ2ByCvFo45jlzyn3qOBEM6j+sKp5B39N++2UPKKJbW/7YKAuEigCY6YSZ3EOI/WiMYOie+16wj5/yWB6Hcc+B7xuUbk+LRt9HlXM6RkBy087/lkSoVXAAkUq3qxxJjS/bSfDoKwgG9RHhLM1RUA1kot0fRVgNdY+bJ3p0wjUBgOV1KX420hvIDj3cyrfvlQtleIvjrTi0kFJ2Kz7kYCzkuTwzU0Y+rHMXbo6E41rJ17nRPpqIY1Ef2zT6Bwa8YsMbjsl9IMMYzSD8j4AL5T2UAH/F4v6QnEFnNiBpf0InNQQGvAzs9oUtHxa8jNxxK6x8t+rxTyNAvaTe/iAuoPng8lcShRaYD/Tf1nMxPRi7uNjOvOdF1+RgOSV28yv2iID/ItXgw7u8wzUfiuX++GtufevzCUOE+IEgx5v4vEeYa/1EgDM=
