@@ -9,8 +9,8 @@ addons:
     - ubuntu-toolchain-r-test
     - llvm-toolchain-precise-3.6
     packages:
-    - gcc-4.8.4
-    - g++-4.8.4
+    - gcc-4.8
+    - g++-4.8
     - clang-3.6
 cache:
   directories:
