@@ -8,7 +8,7 @@ const stationFetcher = require('../lib/stationFetcher');
 
 describe('Station Fetcher', () => {
 
-    const stations = JSON.parse(fs.readFileSync('../data/stations.json'));
+    const stations = JSON.parse(fs.readFileSync('./data/stations.json'));
 
     before((done) => {
         sinon

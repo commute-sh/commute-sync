@@ -13,7 +13,7 @@ const stationDbPersister = require('../lib/stationDbPersister');
 
 describe('Station Db Persister', () => {
 
-    const stations = JSON.parse(fs.readFileSync('../data/stations.json'));
+    const stations = JSON.parse(fs.readFileSync('./data/stations.json'));
 
     const knex = Knex({
         client: Client_Spatialite,

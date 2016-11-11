@@ -12,7 +12,7 @@ const stationCachePersister = require('../lib/stationCachePersister');
 
 describe('Station Cache Persister', () => {
 
-    const stations = JSON.parse(fs.readFileSync('../data/stations.json'));
+    const stations = JSON.parse(fs.readFileSync('./data/stations.json'));
 
     Promise.promisifyAll(FakeRedis.RedisClient.prototype);
     Promise.promisifyAll(FakeRedis.Multi.prototype);
