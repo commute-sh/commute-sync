@@ -1,5 +1,4 @@
 const stationFetcher = require('./lib/stationFetcher');
-// const stationDbPersister = require('./lib/stationDbPersister');
 const stationTsDbPersister = require('./lib/stationTsDbPersister');
 const stationCachePersister = require('./lib/stationCachePersister');
 
@@ -11,7 +10,6 @@ const apiKey = process.env.API_KEY;
 stationFetcher.fetch(city, apiKey).then((stations) => {
     return Promise.map(stations, function(station) {
         return Promise.all([
-//            stationDbPersister.persist(station),
             stationTsDbPersister.persist(station),
             stationCachePersister.persist(station)
         ]);

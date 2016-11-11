@@ -40,9 +40,7 @@
     "gulp-zip": "^3.2.0",
     "mocha": "^2.5.3",
     "run-sequence": "^1.1.5",
-    "sinon": "^1.17.4",
-    "spatialite": "0.0.6",
-    "sqlite3": "^3.1.4"
+    "sinon": "^1.17.4"
   },
   "files": [
     "index.js",
