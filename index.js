@@ -4,8 +4,20 @@ const stationCachePersister = require('./lib/stationCachePersister');
 
 const Promise = require('bluebird');
 
+const AWS = require('aws-sdk');
+
+
 const city = process.env.CITY;
 const apiKey = process.env.API_KEY;
+const profile = process.env.AWS_PROFILE;
+
+AWS.CredentialProviderChain.defaultProviders = [
+    function () { return new AWS.EnvironmentCredentials('AWS'); },
+    function () { return new AWS.EnvironmentCredentials('AMAZON'); },
+    function () { return new AWS.SharedIniFileCredentials({ profile: profile }); },
+    function () { return new AWS.CredentialsEC2MetadataCredentials(); }
+];
+
 
 stationFetcher.fetch(city, apiKey).then((stations) => {
     return Promise.map(stations, function(station) {

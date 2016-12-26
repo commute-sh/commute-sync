@@ -16,6 +16,7 @@
   "author": "Alexis Kinsella <alexis.kinsella@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
+    "aws-sdk": "^2.7.19",
     "bluebird": "^3.4.1",
     "georedis": "^3.0.3",
     "influx": "^4.2.1",
