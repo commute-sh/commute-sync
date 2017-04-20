@@ -26,6 +26,9 @@ before_install:
 - sudo apt-get update -q
 - sudo apt-get install redis-server -y
 - sudo apt-get install redis-tools -y
+- redis-cli ping
+- redis-cli set test 'success'
+- redis-cli get test
 install:
 - npm install
 script:
