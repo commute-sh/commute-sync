@@ -20,6 +20,7 @@ services:
 before_install:
 - sudo apt-get update -q
 - sudo apt-get remove redis-server -y
+- sudo rm -rf /var/lib/redis
 - sudo apt-get install python-software-properties -y
 - sudo apt-get install software-properties-common -y
 - sudo apt-add-repository ppa:chris-lea/redis-server -y
