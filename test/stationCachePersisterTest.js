@@ -2,38 +2,31 @@
 const chai = require('chai');
 const fs = require('fs');
 const expect = require('chai').expect;
-const sinon = require('sinon');
-const FakeRedis = require('fakeredis');
 const Cache = require('../lib/cache');
 const Promise = require('bluebird');
+const _ = require('lodash');
 
-const geoRedis = require('georedis');
 const stationCachePersister = require('../lib/stationCachePersister');
 
 describe('Station Cache Persister', () => {
 
     const stations = JSON.parse(fs.readFileSync('./data/stations.json'));
 
-    Promise.promisifyAll(FakeRedis.RedisClient.prototype);
-    Promise.promisifyAll(FakeRedis.Multi.prototype);
-
-    const fakeClient = FakeRedis.createClient();
+    const cache = Cache.create();
 
     before((done) => {
-        sinon
-            .stub(Cache, 'create')
-            .returns(fakeClient);
 
-        done();
+        cache.select(1, function(err, res) {
+            done(err, res);
+        })
     });
 
     after(function(done) {
-        Cache.create.restore();
         done()
     });
 
     afterEach(function(done){
-        fakeClient.flushdb(function(err) {
+        cache.flushdb(function(err) {
             done(err);
         });
     });
@@ -46,9 +39,6 @@ describe('Station Cache Persister', () => {
             latitude: 48.864528089761734,
             longitude: 2.416168749332428
         };
-
-        const Geo = geoRedis.initialize(fakeClient);
-        const geo = Promise.promisifyAll(Geo.addSet('stations'));
 
         const expectedStation = {
             address: "RUE DES CHAMPEAUX (PRES DE LA GARE ROUTIERE) - 93170 BAGNOLET",
@@ -65,18 +55,46 @@ describe('Station Cache Persister', () => {
                 lat: 48.8645278209514,
                 lng: 2.416170724425901
             },
-            status: "OPEN"
+            status: "OPEN",
+            distance: 0
         };
 
         stationCachePersister.persist(station)
             .then(() => {
-                return Promise.all([
-                    fakeClient.getAsync('Paris_31705').then(result => expect(JSON.parse(result)).to.eql(expectedStation)),
-                    geo.locationAsync(31705).then(result => expect(result).to.eql(expectedLocation))
-                  ]).then(() => done());
+
+                cache.georadiusAsync(`Paris_stations`, expectedLocation.longitude, expectedLocation.latitude, 100, 'km', 'WITHDIST', 'ASC')
+                    .then(entries => {
+                        const keys = entries.map(([stationNumber, _]) => `Paris_${stationNumber}`);
+
+                        return cache.mgetAsync(keys)
+                            .then(_.flatten)
+                            .map(JSON.parse)
+                            .then ((results) => {
+                                const stations = _.fromPairs(_.map(entries, i => [i[0], Number(i[1])]));
+                                console.log("Stations:", stations);
+                                const resultsMapped = results
+                                    .map((station) => {
+                                        station.distance = stations[station.number] || 0;
+                                        return station;
+                                    });
+                                return resultsMapped;
+                            })
+                            .filter(filterStation(31705))
+                            .then((results) => {
+                                console.log('results[0]:', results[0]);
+                                console.log('expectedStation:', expectedStation);
+                                expect(results[0]).to.eql(expectedStation)
+                                done();
+                            })
+                    });
+
             })
             .catch((err) => {
                 done(err);
             });
     });
 });
+
+function filterStation(stationNumber) {
+    return (station) => station.number === stationNumber
+}

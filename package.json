@@ -18,16 +18,11 @@
   "dependencies": {
     "aws-sdk": "^2.7.19",
     "bluebird": "^3.4.1",
-    "georedis": "^3.0.3",
     "influx": "^4.2.1",
-    "knex": "^0.11.10",
-    "knex-postgis": "^0.1.8",
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
-    "mysql": "^2.11.1",
     "redis": "^2.7.1",
-    "request": "^2.72.0",
-    "wkx": "^0.3.0"
+    "request": "^2.72.0"
   },
   "engines": {
     "nodejs": "^6.2.2"
@@ -35,7 +30,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "del": "^2.2.0",
-    "fakeredis": "^1.0.3",
     "gulp": "^3.9.1",
     "gulp-install": "^0.6.0",
     "gulp-zip": "^3.2.0",
